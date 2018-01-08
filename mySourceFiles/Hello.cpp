@@ -42,11 +42,23 @@ namespace
 		/***********/
 		Hello() : FunctionPass(ID) {}
 
+		/***********************/
+		/* run On Function ... */
+		/***********************/
 		virtual bool runOnFunction(Function &F)
 		{
 			++HelloCounter;
 			errs() << "Hello My World: ";
 			errs().write_escaped(F.getName()) << '\n';
+			errs() << "With First Input Parameter: ";
+
+			llvm::Argument *end   = F.arg_end();
+			llvm::Argument *begin = F.arg_begin();
+
+			if (begin != end)
+			{
+				errs() << begin->getName() << '\n';
+			}
 			return false;
 		}
 	};
