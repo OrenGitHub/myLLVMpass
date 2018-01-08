@@ -33,7 +33,7 @@ all:
 	@echo "*                                          *"
 	@echo "********************************************"
 	@setterm -term linux -fore white
-	cp ${PASS_SRC_FILE} ${LLVM_SRC_DIR}/lib/Transforms
+	cp ${PASS_SRC_FILE} ${LLVM_SRC_DIR}/lib/Transforms/Hello
 	@setterm -term linux -fore blue
 	@echo "******************************************"
 	@echo "*                                        *"
