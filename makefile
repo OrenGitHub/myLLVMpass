@@ -12,10 +12,10 @@ OUTPUT_DIR     = ${BASEDIR}/myOutputFiles
 #########
 # FILES #
 #########
-OPT           = ${LLVM_DIR}/bulid/bin/opt
-LLVM_DIS      = ${LLVM_DIR}/bulid/bin/llvm-dis
+OPT           = ${LLVM_BUILD_DIR}/bin/opt
+LLVM_DIS      = ${LLVM_BUILD_DIR}/bin/llvm-dis
 PASS_SRC_FILE = ${PASS_DIR}/Hello.cpp
-PASS_OBJ_FILE = ${LLVM_DIR}/build/lib/LLVMHello.so
+PASS_OBJ_FILE = ${LLVM_BUILD_DIR}/lib/LLVMHello.so
 INPUT_FILE    = ${INPUT_DIR}/libosip
 
 ###############
@@ -57,7 +57,7 @@ all:
 	@echo "*                       *"
 	@echo "*************************"
 	@setterm -term linux -fore white
-	${OPT} -load ${PASS} ${PASS_NAME} < ${INPUT_FILE}.bc > ${OUTPUT_DIR}/Output.txt
+	${OPT} -load ${PASS_OBJ_FILE} ${PASS_NAME} < ${INPUT_FILE}.bc > /dev/null
 	@setterm -term linux -fore blue
 	@echo "***************************************************************"
 	@echo "*                                                             *"
@@ -65,7 +65,5 @@ all:
 	@echo "*                                                             *"
 	@echo "***************************************************************"
 	@setterm -term linux -fore white
-	${LLVM_DIS} -o=  \
-	${INPUT_FILE}.ll \
-	${INPUT_FILE}.bc    
+	${LLVM_DIS} -o=${INPUT_FILE}.ll ${INPUT_FILE}.bc    
 
